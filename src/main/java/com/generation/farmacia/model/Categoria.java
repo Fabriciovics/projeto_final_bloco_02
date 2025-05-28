@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 
 @Entity
 @Table(name="tb_categoria")
@@ -17,6 +19,10 @@ public class Categoria {
         @NotBlank(message = "O atributo titulo é obrigatorio")
         @Size(min = 10, max = 100, message = "O titulo  deve ter no minimo 10 caracteres e no maximo 500")
         private String titulo;
+
+        @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade =  CascadeType.REMOVE)
+        @JsonIgnore
+        private List<Produto> produtos;
 
 
     public Long getId() {
@@ -35,4 +41,11 @@ public class Categoria {
         this.titulo = titulo;
     }
 
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
+    }
 }
