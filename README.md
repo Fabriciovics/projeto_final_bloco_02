@@ -1,4 +1,4 @@
-# 🏥 Projeto E-commerce de Farmácia - Backend com Spring Boot
+# Projeto E-commerce de Farmácia - Backend com Spring Boot
 
 <br />
 
@@ -20,75 +20,104 @@
 
 <br />
 
-## 1. Descrição
+## Descrição do Projeto
 
-O projeto **E-commerce de Farmácia** é uma API REST desenvolvida em Java com Spring Boot, que permite o gerenciamento de produtos e categorias de uma farmácia. O objetivo é possibilitar a criação, leitura, atualização e remoção de produtos e categorias, além de testar e praticar conceitos de desenvolvimento de APIs RESTful.
+Este projeto consiste em uma API RESTful para uma farmácia online. Os usuários podem listar produtos farmacêuticos e de bem-estar, categorizá-los e interagir com um sistema de usuários (cadastro, login, etc.). O objetivo principal é demonstrar a criação de um backend funcional utilizando Spring Boot e os conceitos aprendidos durante o Bloco 02 do bootcamp da Generation Brasil.
 
-## 2. Sobre esta API
+## Tecnologias Utilizadas
 
-A API foi desenvolvida utilizando **Java** e o **framework Spring**, seguindo os princípios da Arquitetura MVC e REST. Ela oferece endpoints para o gerenciamento dos recursos **Categoria** e **Produto**, que estão relacionados entre si.
+* **Linguagem de Programação:** Java
+* **Framework:** Spring Boot
+* **Banco de Dados:** MySQL
+* **Outras Bibliotecas/Ferramentas:** Lombok, Spring Security, Bean Validation, Jackson
 
-### 2.1. Funcionalidades:
+## Configuração e Execução
 
-1. CRUD completo de Categorias
-2. CRUD completo de Produtos
-3. Relacionamento entre Produtos e Categorias (One to Many)
-4. Busca por nome de Produto e Categoria
-5. Validações e tratamento de erros
+1.  **Pré-requisitos:**
+
+    * Java JDK 17 ou superior.
+    * Maven instalado.
+    * Um banco de dados MySQL em execução.
+    * Postman ou Insomnia para testar a API.
+2.  **Configuração do Banco de Dados:**
+
+    * Crie um banco de dados chamado `db_farmacia`.
+    * Configure as credenciais do banco de dados (URL, usuário, senha) no arquivo `src/main/resources/application.properties`.
+3.  **Executando a Aplicação:**
+
+    * Clone este repositório: `git clone https://github.com/Fabriciovics/projeto_final_bloco_02.git`
+    * Navegue até o diretório do projeto: `cd projeto_final_bloco_02`
+    * Execute a aplicação usando Maven: `./mvnw spring-boot:run`
+4.  **Acessando a API:**
+
+    * A API estará disponível em `http://localhost:8080`.
+
+## Endpoints da API
+
+* `/usuarios`:
+
+    * `POST /usuarios/cadastrar`: Cadastra um novo usuário.
+    * `POST /usuarios/logar`: Autentica um usuário e retorna um token JWT.
+    * `GET /usuarios/{id}`: Retorna um usuário específico pelo ID (requer autenticação).
+* `/categorias`:
+
+    * `GET /categorias`: Retorna todas as categorias.
+    * `GET /categorias/{id}`: Retorna uma categoria específica pelo ID.
+    * `POST /categorias`: Cria uma nova categoria (requer autenticação).
+    * `PUT /categorias/{id}`: Atualiza uma categoria existente (requer autenticação).
+    * `DELETE /categorias/{id}`: Exclui uma categoria (requer autenticação).
+* `/produtos`:
+
+    * `GET /produtos`: Retorna todos os produtos.
+    * `GET /produtos/{id}`: Retorna um produto específico pelo ID.
+    * `POST /produtos`: Cria um novo produto (requer autenticação).
+    * `PUT /produtos/{id}`: Atualiza um produto existente (requer autenticação).
+    * `DELETE /produtos/{id}`: Exclui um produto (requer autenticação).
+
+## Exemplos de Uso
+
+* **Cadastrar um usuário:**
+
+    ```
+    POST /usuarios/cadastrar
+    Content-Type: application/json
+
+    {
+        "nome": "Nome do Usuário",
+        "usuario": "email@example.com",
+        "senha": "senhaforte123"
+    }
+    ```
+* **Criar uma categoria (requer token JWT):**
+
+    ```
+    POST /categorias
+    Content-Type: application/json
+    Authorization: Bearer SEU_TOKEN_JWT
+
+    {
+        "titulo": "Medicamentos"
+    }
+    ```
+
+    Resposta:
+
+    ```json
+    {
+        "id": 1,
+        "titulo": "Medicamentos",
+        "produtos": []
+    }
+    ```
+
+## Contribuição
+
+Sinta-se à vontade para abrir issues e propor melhorias! Pull requests são bem-vindos.
 
 
-## 3. Diagrama de Classes
+## Autor
 
-```mermaid
-classDiagram
-class Produto {
-  - id : Long
-  - nome : String
-  - descricao : String
-  - preco : BigDecimal
-  - estoque : Integer
-  - categoria : Categoria
-}
-class Categoria {
-  - id : Long
-  - nome : String
-  - descricao : String
-  - produtos : List<Produto>
-}
-Categoria "1" --> "0..*" Produto : possui
-```
-
-## 4. Tecnologias utilizadas
-
-| Item                          | Descrição       |
-| ----------------------------- | --------------- |
-| **Linguagem de programação**  | Java            |
-| **Framework**                 | Spring Boot     |
-| **ORM**                       | JPA + Hibernate |
-| **Banco de dados Relacional** | MySQL           |
-| **Documentação**              | SpringDoc OpenAPI |
-| **Testes de API**             | Insomnia ou Postman |
-
-## 5. Requisitos
-
-- Java JDK 17+
-- Banco de dados MySQL
-- STS ou IntelliJ IDEA
-- Insomnia ou Postman
-
-## 6. Como Executar o projeto
-
-1. Clone o repositório:
-
-```bash
-git clone https://github.com/Fabriciovics/projeto_final_bloco_02.git
-```
-
-2. Abra na sua IDE
-3. Configure o arquivo `application.properties` com seus dados de banco
-4. Execute a classe `farmaciaApplication`
-5. Teste os endpoints via Insomnia ou Postman
-
+* Fabricio Viana - [Fabriciovics](https://github.com/Fabriciovics)
 ## 8. Contato
 
 Desenvolvido por [**Fabriciovics**](https://github.com/Fabriciovics)  
